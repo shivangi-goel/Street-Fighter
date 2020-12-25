@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
+#animate2 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right:0px;
+  bottom:200px;
+  background-color: blue;
+}
+#animate3 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right:150px;
+  background-color: pink;
+}
+#animate4 {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right:150px;
+  bottom:0px;
+  background-color: green;
+}
+</style>
+<body>
+
+<p><button onclick="myMove();myMove2();myMove3();myMove4()">Click Me</button></p> 
+<div id ="container">
+  <div id ="animate"></div>
+  <div id="animate2"></div>
+  <div id="animate3"></div>
+  <div id="animate4"></div>
+</div>
+
+<script>
+function myMove() {
+  var elem = document.getElementById("animate");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      //elem.style.top = pos + "px"; 
+      elem.style.left = pos + "px"; 
+    }
+  }
+  
+ 
+}
+
+function myMove2() {
+  var elem = document.getElementById("animate2");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      //elem.style.top = pos + "px"; 
+      //elem.style.left = pos + "px"; 
+	  elem.style.right=pos+"px";
+    }
+  }
+  
+ 
+}
+
+function myMove3() {
+  var elem = document.getElementById("animate3");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.bottom = pos + "px"; 
+      //elem.style.left = pos + "px"; 
+	  //elem.style.right=pos+"px";
+    }
+  }
+  
+ 
+}
+function myMove4() {
+  var elem = document.getElementById("animate4");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.top = pos + "px"; 
+      //elem.style.left = pos + "px"; 
+	  //elem.style.right=pos+"px";
+    }
+  }
+  
+ 
+}
+</script>
+
+</body>
+</html>

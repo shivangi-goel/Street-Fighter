@@ -1,0 +1,211 @@
+ <!DOCTYPE html>
+    <head>
+		 <meta charset="UTF-8"> 
+		
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+        <style>
+            .styled {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .centred {
+                text-align:center;
+            }
+            
+            #network-output {
+				font-size: 80px;
+			
+			}
+			.body{
+			background-image: url("background.jpg");
+ background-color: #cccccc;
+}
+.button{
+	background-color: #792a2a; color: black;
+	font-size: 36px;
+	padding: 20px;
+	border-radius: 8px;
+}
+h2
+{
+    color:#DCCBCB;
+    font-size:20px;
+    font-family: georgia, sans-serif;
+}
+h3
+{
+    color:#DCCBCB;
+}
+h4{
+    color:#DCCBCB;
+}
+#animate {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top:1100px;
+}
+#animate12 {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top:1100px;
+}
+#animate13 {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top:1060px;
+}
+#animate14{
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top:1060px;
+}
+#animate2 {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  right:0px;
+  top:1000px;
+}
+#animate3 {
+  width: 5px;
+  height: 5px;
+  position: relative;
+  left:550px;
+  bottom:0px;
+}
+#animate4 {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left:550px;
+}
+#centerPerson{
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left:575px;
+  top:1100px;
+}
+#diecenterPerson{
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left:575px;
+  top:1100px;
+}
+#rightcenterPerson{
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left:575px;
+  top:1100px;
+}
+p.outset {;
+position:absolute;
+left:450px;
+top:150px;
+height: 100px;
+width:400px;}
+        </style>
+
+    </head>
+    <body>
+    	<div class="body">
+        <div class="container">
+			
+			<div class="row">
+				
+				<div class="col-xs-12" align="Right">
+					<h1 class="styled centred" style="color:rgb(122, 42, 42);font-size:100px;font-family:Cambria, Cochin, Georgia, Times, 'Lucida Console', sans-serif"><i>Street Fighter</i></h1>
+                    
+                </div>
+			</div>
+			
+			 <div class="row">
+				<div class="col-xs-6">
+					<div class="row">
+						<div class="col-sm-12">
+							<h4>Model JSON:</h4> <input type="file" id="upload-json"/><br>
+							<h4>Model Binary:</h4> <input type="file" id="upload-weights"/><br>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-12" id="load-button">
+						</div>
+					</div>
+				</div align="Right"> 
+				<div align="right">
+                <button class="button_play" style="height:100px;width:200px; background-color: #942525; color: black;padding: 30px;
+                border-radius: 5px;font-size: 20px;border-radius: 15px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">START GAME !</button>
+                <!-- <button style="height:200px;width:200px"></button> -->
+				</div>
+				<div align="center" style="color:white; font-family:'Arial Narrow Bold', sans-serif;font-size:16px;text-align: center;">
+				<p class="outset"> Enemies are approaching from four directions left, right, front and back, identify them and swipe or speak out the directions. There are 5 lives, click on the start button to play and for better experience use headphones. </p>
+            </div>
+				<div align="Right">
+                        <div class="score" align="Right"><h2 class="score_val">Score-0</h2>
+                    
+                </div>
+                <div class="life" align="Right"><h2 class="life_val">Lives-5</h2>
+                </div>
+            </div>
+				<div class="col-xs-6" id="network-output">
+					<!--<h3>Network Output</h3><br>-->
+				</div>
+            </div>
+            
+            <br>
+
+            <div class="row">
+                <div class="col-sm-6 styled centred" id="centered">
+					
+                </div>
+                <div class="col-sm-3 styled" id="coordinates">
+                </div>
+                <div class="col-sm-3 styled" id="network-inputs">
+                </div>
+            </div>
+        </div>
+		<div>
+			<center>
+        <h3 style="font-family:verdana> <p style="color:blue;" class="phrase">Phrase...</p></h3>
+       <h3 style="font-family:verdana> <p style="color:blue;" class="result">Right or wrong?</p>
+       <h3 style="font-family:verdana> <p style="color:blue;" class="output">...diagnostic messages</p>
+
+    </div>
+    </center>
+</div>
+<div id ="animate" ><img src="leftwalk1.png" style="width:250px;height:200px;"></div>
+  <div id="animate2"><img src="gunShooter.png" style="width:250px;height:200px;"></div>
+  <div id="animate3"><img src="gunShooter.png" style="width:250px;height:200px;"></div>
+  <div id="animate4"><img src="gunShooter.png" style="width:250px;height:200px;"></div>
+  <div id="centerPerson"><img src="backposecenter.png" style="width:200px;height:160px;"></div>
+  <div id="diecenterPerson"><img src="diecenter.png" style="width:200px;height:160px;"></div>
+  <div id="rightcenterPerson"><img src="rightcenter.png" style="width:200px;height:160px;"></div>
+  <div id="animate12"><img src="leftwalk2.png" style="width:250px;height:200px;"></div>
+  <div id="animate13"><img src="leftdie.png" style="width:250px;height:200px;"></div>
+  <div id="animate14"><img src="leftdie2.png" style="width:250px;height:200px;"></div>
+		<script src="sketch.js"></script>
+		<script src="script2.js"></script>
+
+    </body>
+</html>
